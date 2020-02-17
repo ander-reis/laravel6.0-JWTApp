@@ -13,19 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::get('teste', function(Request $request){
-    return ['teste' => 'teste api'];
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
 
 Route::post('login', 'Api\AuthController@accessToken');
 Route::post('register', 'ApiController@register');
 
 Route::group(['middleware' => 'auth.jwt', 'namespace' => 'Api\\'], function () {
-    Route::get('logout', 'ApiController@logout');
+    Route::post('logout', 'AuthController@logout');
 
     Route::get('user', function(Request $request){
         return $request->user();

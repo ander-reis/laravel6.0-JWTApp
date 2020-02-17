@@ -19,7 +19,7 @@ class TaskController extends Controller
      */
     public function __construct()
     {
-        $this->user = JWTAuth::parseToken()->authenticate();
+//        $this->user = JWTAuth::parseToken()->authenticate();
     }
 
     /**
@@ -27,7 +27,6 @@ class TaskController extends Controller
      */
     public function index()
     {
-//        $tasks = $this->user->tasks()->get(['title', 'description'])->toArray();
         $tasks = Task::all(['title', 'description']);
         return response()->json($tasks);
     }
@@ -38,7 +37,6 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-//        $task = $this->user->tasks()->find($id);
         $task = Task::findOrFail($id);
 
         if (!$task) {
@@ -86,7 +84,6 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-//        $task = $this->user->tasks()->find($id);
         $task = Task::findOrFail($id);
 
         if (!$task) {
@@ -116,7 +113,7 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        $task = $this->user->tasks()->find($id);
+        $task = Task::findOrFail($id);
 
         if (!$task) {
             return response()->json([
